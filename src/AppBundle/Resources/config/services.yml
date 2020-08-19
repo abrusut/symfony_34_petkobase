@@ -1,0 +1,16 @@
+imports:
+    - { resource: parameters.yml }
+services:
+    provincia_service:
+        class: AppBundle\Service\ProvinciaService
+        autowire: true
+
+    json_service:
+        class: AppBundle\Service\JsonService
+        autowire: true
+
+    atributo_configuracion_service:
+        class: AppBundle\Service\AtributoConfiguracionService
+        autowire: true
+
+

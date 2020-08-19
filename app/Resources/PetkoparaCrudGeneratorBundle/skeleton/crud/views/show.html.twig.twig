@@ -1,0 +1,49 @@
+{{ "{% extends '"~  base_template  ~ "' %}" }}
+
+{{ "{% block title %}" }}
+{{ "{{ parent() }}" }} - {{ entity_singularized }}
+{{ "{% endblock %}" }}
+
+{{ "{% block body %}" }}
+
+<div class="row mt-5">
+    {% include 'crud/views/others/flash_messages.html.twig.twig' %}
+    <div class="col-lg-12">
+        <h4>Visualizaci&oacute;n de {{ entity_singularized }} <span class="fa fa-eye" aria-hidden="true"></span>  </h4>
+    </div>
+</div>
+
+<div class="row">
+
+    {%- for field, metadata in fields %}
+
+    <div class="col-md-6">
+        <p><strong>{{ field|capitalize }}</strong></p>
+        <p>
+{%if metadata.type in ['datetime','datetimetz'] %}
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}
+{%elseif metadata.type in ['date'] %}
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d\') }}{% endif %}' }}
+{%elseif metadata.type in ['time'] %}
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|date(\'H:i:s\') }}{% endif %}' }}
+{%elseif metadata.type in ['array'] %}
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ '|join(\', \') }}{% endif %}' }}
+{%elseif metadata.type in ['boolean'] %}
+            {{ '{% if ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' %}Si{% else %}No{% endif %}' }}
+{%else %}
+            {{ '{{ ' ~ entity_singularized ~ '.' ~ field|replace({'_': ''}) ~ ' }}' }}
+{% endif %}
+        </p>
+
+    </div>
+    {%- endfor %}
+
+</div>
+
+<hr/>
+
+{% set hide_edit, hide_delete, hide_new= false, false, false %}
+{% include 'crud/views/others/record_actions.html.twig.twig' %}
+
+{{ "{% endblock %}" }}
+

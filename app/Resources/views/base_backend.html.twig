@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="precios santafesinos" />
+    <title>Listado de productos Santafesinos</title>
+
+{% block stylesheets %}
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,600,600i,700,700i,800,800i'
+          rel='stylesheet'>
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="{{ asset('bundles/petkoparacrudgenerator/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href={{ asset("css/style.css") }} rel="stylesheet" />
+    <link href={{ asset("css/selectize/selectize.bootstrap3.css") }} rel="stylesheet" />
+    <link href={{ asset("css/tail-select/tail.select-default.css") }} rel="stylesheet" />
+    <style>
+        html {
+            font-size: unset;
+        }
+        .navbar.navbar-menu span {
+            background-color: #8cb4d6;
+        }
+        .navbar-toggle {
+            border-color: #8cb4d6;
+        }
+    </style>
+{% endblock %}
+{#    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>#}
+
+    {#    TODO: AGREGAR ICONO DE LA PAGINA #}
+{#    <link rel="icon" type="image/x-icon" href="{{ asset("images/logo-precios-santafesinos.png") }}" />#}
+
+{#    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->#}
+</head>
+
+<body>
+<header>
+
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+
+{#                    TODO: AGREGAR LOGO DEL SISTEMA #}
+{#                <img class="img-fluid logo-precios" src="{{ asset("images/logo-precios-santafesinos.png") }}"#}
+{#                     alt="Precios Santafesinos">#}
+
+            </div>
+            <div class="navbar-header navbar-right">
+                <img class="img-fluid logo-santafe" src="{{ asset("images/logo-santafe.png") }}" alt="Santa Fe">
+            </div>
+        </div>
+    </nav>
+
+
+    <nav class="navbar navbar-dark navbar-menu" role="navigation">
+        <div class="container">
+            <!-- El logotipo y el icono que despliega el menú se agrupan
+                 para mostrarlos mejor en los dispositivos móviles -->
+            <div class="navbar-header">
+                <button type="button" class="pull-left navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Desplegar navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Agrupar los enlaces de navegación, los formularios y cualquier
+                 otro elemento que se pueda ocultar al minimizar la barra -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+
+{#                {% if ( is_granted('ROLE_ADMIN') )%}#}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administraci&oacute;n <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ path('atributoconfiguracion') }}">Administraci&oacute;n de Parametros de aplicaci&oacute;n</a>
+                            </li>
+                        </ul>
+                    </li>
+{#                {% endif %}#}
+
+                </ul>
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item "><a class="nav-link" href="{# {{ path('logout_cas') }} #}">Salir</a></li>
+                </ul>
+
+            </div>
+        </div>
+    <!--/.Navbar-->
+</header>
+
+
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+
+<footer class="mt-5 page-footer font-small">
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+        <!-- Grid row -->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-12 text-center">
+                <p class="mt-3">
+                    Gobierno de la Provincia de Santa Fe<br>
+                    Ministerio de Producci&oacute;n, Ciencia y Tecnolog&iacute;a<br>
+                    Secretar&iacute;a de Comercio Interior y Servicios
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/petkoparacrudgenerator/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bundles/petkoparacrudgenerator/js/petkopara-crud-generator.js') }}"></script>
+    <script src="{{ asset('bundles/petkoparacrudgenerator/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset("js/selectize/selectize.min.js") }}"></script>
+    <script src="{{ asset("js/tail-select/tail.select-full.js") }}"></script>
+
+    <script>
+
+    </script>
+
+{% endblock %}
+
+<!-- Footer -->
+</body>
+</html>

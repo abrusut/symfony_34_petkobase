@@ -1,0 +1,16 @@
+
+{% if 'delete' in actions %}
+                            <a  onclick="return confirm('¿Está seguro?');" title="Eliminar" class="btn btn-danger btn-sm" href="{{ "{{ path('"~ route_name_prefix ~"_by_id_delete', { 'id': " ~ entity_singularized ~ "."~ identifier ~"}) }}" }}">
+                                <span class="fa fa-times" aria-hidden="true"></span>
+                            </a>
+{% endif %}
+{% if 'show' in actions %}
+                            <a title='Ver' class="btn btn-info btn-sm" href="{{ "{{ path('"~ route_name_prefix ~"_show', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+                                <span class="fa fa-eye" aria-hidden="true"></span>
+                            </a>
+{% endif %}
+{% if 'edit' in actions %}
+                            <a  title='Editar' class="btn btn-primary btn-sm" href="{{ "{{ path('"~ route_name_prefix ~"_edit', { 'id': " ~ entity_singularized ~ "."~ identifier ~" }) }}" }}">
+                                <span class="fa fa-pencil" aria-hidden="true"></span>
+                            </a>
+{% endif %}

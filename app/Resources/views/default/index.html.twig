@@ -1,0 +1,112 @@
+{% extends 'default/base_frontend.html.twig' %}
+
+{% block body %}
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            {% for type, flashMessages in app.session.flashbag.all() %}
+                {% for flashMessage in flashMessages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ flashMessage|raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-lg-12">
+            <h4>Listado de productos</h4>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <label for="categoriaTableFiltro" id="tituloFiltro">Categoría</label>
+                <select class="form-control datatable-filter" id="categoriaTableFiltro" name="categoriaTableFiltro">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6" id="productosTableSearchCont">
+            <div class="form-group">
+                <label for="productosTableSearch">Buscá por marca, tipo de alimento o unidad</label>
+                <input class="form-control datatable-filter" id="productosTableSearch" type="text" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 m-b-4">
+            <div class="table-responsive">
+                <table class="table tabla-condensed table-striped" id="productosTable">
+                    <caption>&nbsp;</caption>
+                    <thead>
+                    <th class="">Descripci&oacute;n</th>
+                    <th class="">Categor&iacute;a</th>
+                    <th class="">Precio</th>
+                    </thead>
+                    <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td class="" data-title="Descripcion">{{ producto.getDescripcion() }}</td>
+                            <td class="" data-title="Categoria">{{ producto.getRubro().getNombre() }}</td>
+                            <td class="" data-title="Precio">${{ producto.getPrecio }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{#    POP UP MODAL BOOTSTRAP 4 #}
+    <!-- Modal -->
+    <div class="modal fade" id="popCovid19" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Atencion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <div class="card">
+                                <img class="img-thumbnail rounded mx-auto d-block w-450 h-150 border-0"
+                                     src="{{ asset("images/covid.png") }}" alt="CORONAVIRUS">
+                                <div class="card-body">
+                                    <h5 class="card-title">CORONAVIRUS</h5>
+                                    <p class="card-text">
+                                        Señor visitante, si usted desea ingresar un Reclamo por
+                                        desabastecimiento o aumentos excesivos de precios en productos en el marco del coronavirus
+                                    </p>
+                                    <div class="clearfix"></div>
+{#                                    <a  href="{{ path('informar_abuso') }}" class="btn btn-primary"> Ingrese aqui</a>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <!--
+        Habilitar popUp Covid-19
+    script>
+        $(function() {
+            $('#popCovid19').modal('show')
+        });
+    </script-->
+{% endblock %}
