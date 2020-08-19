@@ -3,11 +3,8 @@
 namespace AppBundle\Repository;
 
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Paginator;
-use App\Entity\TipoDocumento;
+use AppBundle\Entity\TipoDocumento;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 class TipoDocumentoRepository  extends ServiceEntityRepository
@@ -18,9 +15,9 @@ class TipoDocumentoRepository  extends ServiceEntityRepository
      */
     private $registry;
     
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        parent::__construct($registry, TipoDocumento::class);
+        parent::__construct($managerRegistry, TipoDocumento::class);
     }
     
     /**

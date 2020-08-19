@@ -77,8 +77,8 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "no-reply@santafe.gov.ar"
-        sender_name: "Santa Fe"
+        address: "no-reply@gmail.com"
+        sender_name: "Medra"
     registration:
         form:
             type: AppBundle\Form\RegistrationFormType

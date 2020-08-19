@@ -14,18 +14,18 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Default controller.
  *
- * @Route("/")
+ * @Route("/default")
  */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="public_home")
+     * @Route("/index", name="public_home")
      */
     public function indexAction(Request $request)
     {
 
         return $this->render('default/index.html.twig', [
-            'productos' => array(),
+            'personas' => array(),
         ]);
 
     }

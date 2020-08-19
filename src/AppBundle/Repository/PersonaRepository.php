@@ -4,26 +4,18 @@
 namespace AppBundle\Repository;
 
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Paginator;
-use App\Entity\Persona;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
+
+
+use AppBundle\Entity\Persona;
 use Doctrine\Persistence\ManagerRegistry;
-use Faker\Provider\Person;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class PersonaRepository extends ServiceEntityRepository
 {
-    private $tokenStorage;
-    /**
-     * @var ManagerRegistry
-     */
-    private $registry;
     
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        parent::__construct($registry, Persona::class);
+        parent::__construct($managerRegistry, Persona::class);
     }
     
     /**

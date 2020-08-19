@@ -39,7 +39,7 @@ monolog:
         app_logs:
             type:  rotating_file
             max_files: 5
-            path:   "%kernel.logs_dir%/precios-santafesinos_%kernel.environment%.log"
+            path:   "%kernel.logs_dir%/default_%kernel.environment%.log"
             level:  debug
             channels: ["!doctrine","!main","!event","!php","!translation","!security"]
 #swiftmailer:

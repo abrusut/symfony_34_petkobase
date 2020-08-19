@@ -28,3 +28,7 @@ fos_user_change_password:
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+app_persona:
+    resource: "@AppBundle/Controller/PersonaController.php"
+    type:     annotation
