@@ -7,12 +7,8 @@ body {
   margin: 0;
 }
 
-.navbar-header img.logo-santafe {
+.navbar-header img.logo-default {
   max-height: 40px;
-}
-
-.navbar-header img.logo-precios {
-  max-height: 60px;
 }
 
 .navbar {
@@ -34,7 +30,7 @@ body {
 }
 
 .navbar.navbar-menu {
-  background-color: #0875bc;
+  background: linear-gradient(90deg,rgba(47,71,147,1) 0%,rgba(116,203,243,1) 100%)!important;
   color: #fff;
 }
 
@@ -65,7 +61,7 @@ h4 {
 }
 
 footer {
-    background-color: #0875bc;
+    background: linear-gradient(90deg,rgba(47,71,147,1) 0%,rgba(116,203,243,1) 100%)!important;
     color: #fff;
 }
 

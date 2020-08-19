@@ -29,11 +29,12 @@ class UserFixture extends Fixture
     public function load(ObjectManager $manager)
     {
         $entidad = new User();
-        $entidad->setUsername('galescano');
-        $entidad->setEmail('galescano@santafe.gov.ar');
+        $entidad->setUsername('admin');
+        $entidad->setEmail('admin@app.com');
         $entidad->setPassword(
             $this->passwordEncoder->encodePassword($entidad, 'test123')
         );
+        $entidad->setEnabled(true);
         $entidad->setRoles(['ADMIN']);
         $manager->persist($entidad);
 
