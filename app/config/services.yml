@@ -54,7 +54,7 @@ services:
         tags:
             - { name: form.type }
 
-    AppBundle\Form\FOSUserBundle\ProfileFormType:
+    AppBundle\Form\FOSUserBundle\ProfileFormTyp:
         tags:
             - { name: form.type }
 

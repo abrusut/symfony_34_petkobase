@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TipoDocumento
- * @ORM\Entity(repositoryClass="App\Repository\TipoDocumentoRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TipoDocumentoRepository")
  * @ORM\Table(name="tipo_documento")
  * @ORM\HasLifecycleCallbacks()
  */

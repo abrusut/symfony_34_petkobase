@@ -14,7 +14,12 @@
 
                 <!-- Links -->
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('persona_new') }}">Nueva Persona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('persona') }}">Listado Personas</a>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
@@ -24,13 +29,13 @@
                             {{ app.user.email }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">Editar Perfil</a>
-                            <div class="dropdown-divider"></div>
+{#                            <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">Editar Perfil</a>#}
+{#                            <div class="dropdown-divider"></div>#}
                             <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Salir</a>
                         </div>
                     </li>
                 {% else %}
-                    <li class="nav-item "><a class="nav-link" href="{{ path('fos_user_registration_register') }}">Registrarme</a></li>
+{#                    <li class="nav-item "><a class="nav-link" href="{{ path('fos_user_registration_register') }}">Registrarme</a></li>#}
                     <li class="nav-item "><a class="nav-link" href="{{ path('fos_user_security_login') }}">Entrar</a></li>
                 {% endif %}
                 </ul>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href={{ absolute_url(asset("css/style.css")) }} rel="stylesheet" />
+</head>
+
+<body>
+
+<style>
+    body {
+        font-family: "Montserrat";
+        font-size: 0.85rem;
+    }
+
+    h4 {
+        text-transform: uppercase;
+    }
+
+    footer {
+        background-color: #0875bc;
+        color: #fff;
+    }
+
+    .producto-imagen img {
+        max-height: 50px;
+    }
+
+</style>
+
+<header>
+    <table style='width: 100%'>
+        <tr>
+{#            <td> <img class='img-fluid logo-precios' align='left' style='max-height: 60px;'  src="{{ absolute_url(asset("images/logo-precios-santafesinos.png")) }}"#}
+{#                      alt='Precios Santafesinos'></td>#}
+            <td> <img class='img-fluid logo-santafe' style='max-height: 40px;' src="{{ absolute_url(asset("images/logo-santafe.png")) }}" align='right'
+                      alt='Santa Fe'></td>
+        </tr>
+    </table>
+
+    <!--/.Navbar-->
+</header>
+
+<div class="container" style="margin: 10px">
+
+    <div>
+        <h4>Registraci&oacute;n de nueva solicitud - <span id='fecha-creacion-solicitud'>{{ solicitudEmpresa.fechaIngreso | date("d/m/Y H:i:s") }}</span></h4>
+    </div>
+    <div>
+        <p>El siguiente registro se genero a travez del formulario de Registraci&oacute;n de Empresa de FEGSFE, por favor, no responda a este correo</p>
+        <p><b>Razon social: </b> <span id='localidad'>{{ solicitudEmpresa.razonSocial }}</span></p>
+        <p><b>Cuit: </b><span id='nombre-comercio'>{{ solicitudEmpresa.cuit }}</span></p>
+        <p><b>Email de contacto: </b><span id='direccion'>{{ solicitudEmpresa.email }}</span></p>
+
+        <p>
+            Puede ingresar al sistema desde el siguiente enlace: <a href="https://www.santafe.gob.ar/fegsfe/login">Link</a>
+        </p>
+
+    {#    if ($tiene_imagen) {#}
+    {#    $body .= "#}
+    {#    <p ><b > Imagen Adjunta: </b ></p >#}
+
+    {#    <div class='row mt-5' >#}
+    {#        <img src = 'cid:mi-foto' alt = 'mi-foto' style = 'max-height: 250px' >#}
+    {#    </div >#}
+    </div>
+</div>
+
+<footer class="mt-5 page-footer font-small" >
+    <table style='width: 100%; background-color: #0875bc; color: #fff;"'>
+        <tr>
+            <td align="center">
+                <p class="mt-3">
+                    Gobierno de la Provincia de Santa Fe<br>
+                    Ministerio de Producci&oacute;n, Ciencia y Tecnolog&iacute;a<br>
+                </p>
+            </td>
+
+        </tr>
+    </table>
+    <!-- Footer Links -->
+</footer>
+
+<!-- Footer -->
+</body>
+</html>

@@ -1,4 +1,8 @@
-{% extends 'default/base_frontend.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Listado de persona
+{% endblock %}
 
 {% block body %}
 
@@ -12,101 +16,166 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div class="col-lg-12">
-            <h4>Listado de Personas</h4>
-        </div>
-    </div>
 
-    <div class="row mt-5">
-        <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-                <label for="categoriaTableFiltro" id="tituloFiltro">Categoría</label>
-                <select class="form-control datatable-filter" id="categoriaTableFiltro" name="categoriaTableFiltro">
-                    <option value="">Todos</option>
+
+        <div class="col-lg-12">
+            <h4>Listado de persona</h4>
+        </div>
+        <div class="col-md-3 pull-left">
+
+            <!-- PAGE SIZE -->
+            <div class="pagination form-inline ">
+                <select class = "form-control"  onchange="window.location = this.value" >
+                    <option value='{{ path('persona', app.request.query.all|merge({'pcg_show': '10'})) }}' {% if app.request.get('pcg_show') == 10 %} selected {% endif %}>10</option>
+                    <option value='{{ path('persona', app.request.query.all|merge({'pcg_show': '20'})) }}' {% if app.request.get('pcg_show') == 20 %} selected {% endif %}>20</option>
+                    <option value='{{ path('persona', app.request.query.all|merge({'pcg_show': '50'})) }}' {% if app.request.get('pcg_show') == 50 %} selected {% endif %}>50</option>
+                    <option value='{{ path('persona', app.request.query.all|merge({'pcg_show': '100'})) }}' {% if app.request.get('pcg_show') == 100 %} selected {% endif %}>100</option>
+                    <option value='{{ path('persona', app.request.query.all|merge({'pcg_show': '500'})) }}' {% if app.request.get('pcg_show') == 500 %} selected {% endif %}>500</option>
                 </select>
             </div>
+            <!-- END PAGE SIZE -->
+
         </div>
-        <div class="col-sm-12 col-md-6" id="productosTableSearchCont">
-            <div class="form-group">
-                <label for="productosTableSearch">Buscá por marca, tipo de alimento o unidad</label>
-                <input class="form-control datatable-filter" id="productosTableSearch" type="text" />
-            </div>
+
+
+        <!-- FILTERING -->
+        <div class="col-md-6">
+            <form action="{{ path('persona') }}" method="get" >
+
+                <div class="input-group mb-3">
+                    {{form_widget(filterForm.search, { 'attr': {'class': 'form-control'} })}}
+                    {{form_rest(filterForm) }}
+                    <div class="input-group-append">
+                        <a class="btn btn-info" href="{{ path('persona', {'filter_action': 'reset'}) }}">
+                            <span class="fa fa-remove" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
+        <!-- END FILTERING -->
+
+
+
+        <div class="col-md-3">
+            <a class="btn btn-primary h3 pull-right" href="{{ path('persona_new') }}" style="margin-bottom:10px">
+                <span class="fa fa-plus" aria-hidden="true"></span> Nuevo
+            </a>
+        </div>
+
+        <div class="col-md-12">
+            {%- if form_errors(filterForm) %}
+                <div class="alert alert-block alert-error fade in form-errors">
+                    {{ form_errors(filterForm) }}
+                </div>
+            {% endif %}
+        </div>
+
+    </div> <!-- /#top -->
 
     <div class="row">
-        <div class="col-md-12 m-b-4">
-            <div class="table-responsive">
-                <table class="table tabla-condensed table-striped" id="productosTable">
-                    <caption>&nbsp;</caption>
+
+        <div class="table-responsive col-md-12">
+            <form method="POST" id="bulk_form" action="{{ path('persona_bulk_action') }} ">
+                <table class="table table-striped table-hover table-bordered" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th class="">Descripci&oacute;n</th>
-                    <th class="">Categor&iacute;a</th>
-                    <th class="">Precio</th>
+                    <tr>
+                        <th width="20px"><input type="checkbox" class="check-all" onclick="toggleAll(this)"></th>
+
+                        {% import "PetkoparaCrudGeneratorBundle::macros/th_sortable.html.twig" as macros %}
+                        <th>{{macros.th_sortable('id',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('nombre',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('apellido',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('fechaNacimiento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('domicilioCalle',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('domicilioNumero',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('numeroDocumento',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('sexo',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('telefono',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('email',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('createdAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('updatedAt',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+                        <th>{{macros.th_sortable('fechaBaja',app.request.get('pcg_sort_col'), app.request.get('pcg_sort_order') , 'persona')}}</th>
+
+
+                        <th width = "130px">Acciones</th>
+                    </tr>
                     </thead>
                     <tbody>
-                    {% for producto in productos %}
+                    {% for persona in personas %}
                         <tr>
-                            <td class="" data-title="Descripcion">{{ producto.getDescripcion() }}</td>
-                            <td class="" data-title="Categoria">{{ producto.getRubro().getNombre() }}</td>
-                            <td class="" data-title="Precio">${{ producto.getPrecio }}</td>
+                            <td><input type="checkbox" name="ids[]" onclick='bulkSubmitBtnManage();' class="check-all" value="{{persona.id}}"/></td>
+                            <td><a href="{{ path('persona_edit', { 'id': persona.id }) }}">{{ persona.id }}</a></td>
+                            <td>{{ persona.nombre }}</td>
+                            <td>{{ persona.apellido }}</td>
+                            <td>{%- if persona.fechaNacimiento %}{{ persona.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ persona.domicilioCalle }}</td>
+                            <td>{{ persona.domicilioNumero }}</td>
+                            <td>{{ persona.numeroDocumento }}</td>
+                            <td>{{ persona.sexo }}</td>
+                            <td>{{ persona.telefono }}</td>
+                            <td>{{ persona.email }}</td>
+                            <td>{%- if persona.createdAt %}{{ persona.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{%- if persona.updatedAt %}{{ persona.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{%- if persona.fechaBaja %}{{ persona.fechaBaja|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+                            <td class="actions">
+                                <a  onclick="return confirm('¿Está seguro?');" title="Eliminar" class="btn btn-danger btn-sm" href="{{ path('persona_by_id_delete', { 'id': persona.id}) }}">
+                                    <span class="fa fa-times" aria-hidden="true"></span>
+                                </a>
+                                <a title='Ver' class="btn btn-info btn-sm" href="{{ path('persona_show', { 'id': persona.id }) }}">
+                                    <span class="fa fa-eye" aria-hidden="true"></span>
+                                </a>
+                                <a  title='Editar' class="btn btn-primary btn-sm" href="{{ path('persona_edit', { 'id': persona.id }) }}">
+                                    <span class="fa fa-pencil" aria-hidden="true"></span>
+                                </a>
+                            </td>
+
+
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            </form>
+
+
         </div>
-    </div>
+    </div> <!-- /#list -->
 
 
-{#    POP UP MODAL BOOTSTRAP 4 #}
-    <!-- Modal -->
-    <div class="modal fade" id="popCovid19" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Atencion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="col-12">
-                            <div class="card">
-                                <img class="img-thumbnail rounded mx-auto d-block w-450 h-150 border-0"
-                                     src="{{ asset("images/covid.png") }}" alt="CORONAVIRUS">
-                                <div class="card-body">
-                                    <h5 class="card-title">CORONAVIRUS</h5>
-                                    <p class="card-text">
-                                        Señor visitante, si usted desea ingresar un Reclamo por
-                                        desabastecimiento o aumentos excesivos de precios en productos en el marco del coronavirus
-                                    </p>
-                                    <div class="clearfix"></div>
-{#                                    <a  href="{{ path('informar_abuso') }}" class="btn btn-primary"> Ingrese aqui</a>#}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+    <div class="row">
+        <div class="col-md-3 pull-left">
+            <div class="input-group mb-3">
+                <select class = "form-control" name="bulk_action" >
+                    <option value="delete">ELIMINAR</option>
+                </select>
+                <div class="input-group-append">
+                    <input type="submit" id='bulkSubmitBtn' onclick="return confirm('¿Está seguro?')" form="bulk_form" class="form-control btn btn-danger mb-2" disabled>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-md-1"></div>
+
+        <div class='col-md-3 pagination text-center'>
+            <p>{{totalOfRecordsString}}</p>
+        </div>
+
+        <div class="col-md-5 text-right">
+            <div class="pull-right">
+                {{ pagerHtml|raw }}
+            </div>
+        </div>
+    </div> <!-- /#bottom -->
+
+
 
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-
-    <!--
-        Habilitar popUp Covid-19
-    script>
-        $(function() {
-            $('#popCovid19').modal('show')
-        });
-    </script-->
-{% endblock %}

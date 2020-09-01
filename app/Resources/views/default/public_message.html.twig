@@ -1,0 +1,33 @@
+{% extends 'default/base_frontend.html.twig' %}
+
+{% block title %}
+    {{ parent() }} -  Mensaje
+{% endblock %}
+
+{% block body %}
+
+{#    <div id="top" class="row">#}
+{#        <div class="page-header">#}
+{#            <h2> Mensaje <span class="fa fa-hand-stop-o" aria-hidden="true"></span></h2>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
+    <div class="row mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                {% for type, flashMessages in app.session.flashbag.all() %}
+                    {% for flashMessage in flashMessages %}
+                        <div class="alert alert-{{ type }}">
+                            <span class="fa fa-hand-stop-o" aria-hidden="true"></span> {{ flashMessage|raw }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

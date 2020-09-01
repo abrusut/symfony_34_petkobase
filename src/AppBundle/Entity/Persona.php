@@ -4,8 +4,8 @@
 namespace AppBundle\Entity;
 
 
-use App\Entity\Localidad;
-use App\Entity\Provincia;
+use AppBundle\Entity\Localidad;
+use AppBundle\Entity\Provincia;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Persona
- * @ORM\Entity(repositoryClass="App\Repository\PersonaRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PersonaRepository")
  * @ORM\Table(name="persona")
  * @UniqueEntity(fields={"numeroDocumento", "sexo", "tipoDocumento"})
  * @ORM\HasLifecycleCallbacks()
@@ -31,7 +31,7 @@ class Persona
     private $id;
     
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="nombre", type="string", length=60,nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
@@ -41,7 +41,7 @@ class Persona
     private $nombre;
     
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="apellido", type="string", length=60,nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
@@ -51,7 +51,7 @@ class Persona
     private $apellido;
     
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
      * @ORM\Column(name="fecha_nacimiento", type="date", nullable=true)
      * @Assert\NotNull()
@@ -59,7 +59,7 @@ class Persona
     private $fechaNacimiento;
     
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="domicilio_calle", type="string", nullable=true,length=60)
      * @Assert\NotBlank()
      * @Assert\Length(min = 3)
@@ -69,7 +69,7 @@ class Persona
     private $domicilioCalle;
     
     /**
-     * @var integer
+     * @var integer|null
      * @ORM\Column(name="domicilio_numero", type="integer",nullable=true)
      */
     private $domicilioNumero;
@@ -81,7 +81,7 @@ class Persona
     private $tipoDocumento;
     
     /**
-     * @var integer
+     * @var integer|null
      * @ORM\Column(name="numero_documento", type="integer", length=8)
      * @Assert\NotBlank()
      * @Assert\Length(min = 8)
@@ -91,20 +91,20 @@ class Persona
     private $numeroDocumento;
     
     /**
-     * @var String
+     * @var string|null
      * @ORM\Column(name="sexo", type="string", length=1, nullable=true)
      */
     private $sexo;
     
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="telefono", type="string", length=25, nullable=true)
      * @Assert\Length( max = 25)
      */
     private $telefono;
     
     /**
-     * @var string
+     * @var string|null
      * @ORM\Column(name="email", type="string", length=50, nullable=false)
      * @Assert\NotNull()
      * @Assert\Email()
@@ -198,39 +198,39 @@ class Persona
     }
     
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNombre(): string
+    public function getNombre(): ?string
     {
         return $this->nombre;
     }
     
     /**
-     * @param string $nombre
+     * @param string|null $nombre
      */
-    public function setNombre(string $nombre): void
+    public function setNombre(?string $nombre): void
     {
         $this->nombre = $nombre;
     }
     
     /**
-     * @return string
+     * @return string|null
      */
-    public function getApellido(): string
+    public function getApellido(): ?string
     {
         return $this->apellido;
     }
     
     /**
-     * @param string $apellido
+     * @param string|null $apellido
      */
-    public function setApellido(string $apellido): void
+    public function setApellido(?string $apellido): void
     {
         $this->apellido = $apellido;
     }
     
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaNacimiento(): ?\DateTime
     {
@@ -238,15 +238,15 @@ class Persona
     }
     
     /**
-     * @param \DateTime $fechaNacimiento
+     * @param \DateTime|null $fechaNacimiento
      */
-    public function setFechaNacimiento(\DateTime $fechaNacimiento): void
+    public function setFechaNacimiento(?\DateTime $fechaNacimiento): void
     {
         $this->fechaNacimiento = $fechaNacimiento;
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getDomicilioCalle(): ?string
     {
@@ -254,15 +254,15 @@ class Persona
     }
     
     /**
-     * @param string $domicilioCalle
+     * @param string|null $domicilioCalle
      */
-    public function setDomicilioCalle(string $domicilioCalle): void
+    public function setDomicilioCalle(?string $domicilioCalle): void
     {
         $this->domicilioCalle = $domicilioCalle;
     }
     
     /**
-     * @return int
+     * @return int|null
      */
     public function getDomicilioNumero(): ?int
     {
@@ -270,9 +270,9 @@ class Persona
     }
     
     /**
-     * @param int $domicilioNumero
+     * @param int|null $domicilioNumero
      */
-    public function setDomicilioNumero(int $domicilioNumero): void
+    public function setDomicilioNumero(?int $domicilioNumero): void
     {
         $this->domicilioNumero = $domicilioNumero;
     }
@@ -294,7 +294,7 @@ class Persona
     }
     
     /**
-     * @return int
+     * @return int|null
      */
     public function getNumeroDocumento(): ?int
     {
@@ -302,15 +302,15 @@ class Persona
     }
     
     /**
-     * @param int $numeroDocumento
+     * @param int|null $numeroDocumento
      */
-    public function setNumeroDocumento(int $numeroDocumento): void
+    public function setNumeroDocumento(?int $numeroDocumento): void
     {
         $this->numeroDocumento = $numeroDocumento;
     }
     
     /**
-     * @return String
+     * @return string|null
      */
     public function getSexo(): ?string
     {
@@ -318,15 +318,15 @@ class Persona
     }
     
     /**
-     * @param String $sexo
+     * @param string|null $sexo
      */
-    public function setSexo(String $sexo): void
+    public function setSexo(?string $sexo): void
     {
         $this->sexo = $sexo;
     }
     
     /**
-     * @return string
+     * @return string|null
      */
     public function getTelefono(): ?string
     {
@@ -334,25 +334,25 @@ class Persona
     }
     
     /**
-     * @param string $telefono
+     * @param string|null $telefono
      */
-    public function setTelefono(string $telefono): void
+    public function setTelefono(?string $telefono): void
     {
         $this->telefono = $telefono;
     }
     
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
     
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -406,42 +406,9 @@ class Persona
     }
     
     /**
-     * @return string
-     */
-    public function getMedicoCabecera(): ?string
-    {
-        return $this->medicoCabecera;
-    }
-    
-    /**
-     * @param string $medicoCabecera
-     */
-    public function setMedicoCabecera(?string $medicoCabecera): void
-    {
-        $this->medicoCabecera = $medicoCabecera;
-    }
-    
-   
-    /**
-     * @return NivelEducativo
-     */
-    public function getNivelEducativo(): ?NivelEducativo
-    {
-        return $this->nivelEducativo;
-    }
-    
-    /**
-     * @param NivelEducativo $nivelEducativo
-     */
-    public function setNivelEducativo(?NivelEducativo $nivelEducativo): void
-    {
-        $this->nivelEducativo = $nivelEducativo;
-    }
-    
-    /**
      * @return mixed
      */
-    public function getLocalidad(): ?Localidad
+    public function getLocalidad()
     {
         return $this->localidad;
     }
@@ -457,7 +424,7 @@ class Persona
     /**
      * @return mixed
      */
-    public function getProvincia(): ? Provincia
+    public function getProvincia()
     {
         return $this->provincia;
     }
@@ -469,5 +436,7 @@ class Persona
     {
         $this->provincia = $provincia;
     }
+    
+   
     
 }
